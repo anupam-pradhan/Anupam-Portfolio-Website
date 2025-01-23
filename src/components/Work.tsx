@@ -42,6 +42,14 @@ const Work = () => {
       delay: 0.2,
     });
 
+    // Check if ScrollTrigger is loaded correctly
+    if (!ScrollTrigger) {
+      console.error(
+        "ScrollTrigger is not loaded. Please check your GSAP setup."
+      );
+      return; // Skip further execution if ScrollTrigger is not available
+    }
+
     // Clean up ScrollTrigger when component unmounts
     return () => {
       ScrollTrigger.kill(); // This ensures ScrollTrigger is cleared when the component unmounts
@@ -79,3 +87,4 @@ const Work = () => {
 };
 
 export default Work;
+//
