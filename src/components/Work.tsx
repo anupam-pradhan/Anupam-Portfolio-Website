@@ -28,7 +28,6 @@ const Work = () => {
         end: "bottom top",
         scrub: true,
         pin: true,
-        id: "work",
       },
     });
 
