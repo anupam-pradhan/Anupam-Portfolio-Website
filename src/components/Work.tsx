@@ -28,7 +28,6 @@ const Work = () => {
         end: "bottom top",
         scrub: true,
         pin: true,
-        pinType: !ScrollTrigger.isTouch ? "transform" : "fixed",
         id: "work",
       },
     });
