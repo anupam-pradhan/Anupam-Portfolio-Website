@@ -31,12 +31,17 @@ const Navbar = () => {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
           let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          if (section) {
+            const target = document.querySelector(section);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }
         }
       });
     });
     window.addEventListener("resize", () => {
-      ScrollSmoother.refresh(true);
+      // No need for ScrollSmoother.refresh
     });
   }, []);
   return (
