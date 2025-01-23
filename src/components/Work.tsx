@@ -4,9 +4,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Work = () => {
   useEffect(() => {
     let translateX: number = 0;
+
     function setTranslateX() {
       const box = document.getElementsByClassName("work-box");
       const rectLeft = document
@@ -28,6 +31,8 @@ const Work = () => {
         end: "bottom top",
         scrub: true,
         pin: true,
+        pinType: "transform", // Pin the element with transform
+        id: "work",
       },
     });
 
@@ -36,7 +41,13 @@ const Work = () => {
       duration: 40,
       delay: 0.2,
     });
+
+    // Clean up ScrollTrigger when component unmounts
+    return () => {
+      ScrollTrigger.kill(); // This ensures ScrollTrigger is cleared when the component unmounts
+    };
   }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
