@@ -2,14 +2,13 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
+import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const Work = () => {
-  useEffect(() => {
+  useGSAP(() => {
     let translateX: number = 0;
-
     function setTranslateX() {
       const box = document.getElementsByClassName("work-box");
       const rectLeft = document
@@ -31,7 +30,7 @@ const Work = () => {
         end: "bottom top",
         scrub: true,
         pin: true,
-        pinType: "transform", // Pin the element with transform
+        pinType: !ScrollTrigger.isTouch ? "transform" : "fixed",
         id: "work",
       },
     });
@@ -41,21 +40,7 @@ const Work = () => {
       duration: 40,
       delay: 0.2,
     });
-
-    // Check if ScrollTrigger is loaded correctly
-    if (!ScrollTrigger) {
-      console.error(
-        "ScrollTrigger is not loaded. Please check your GSAP setup."
-      );
-      return; // Skip further execution if ScrollTrigger is not available
-    }
-
-    // Clean up ScrollTrigger when component unmounts
-    return () => {
-      ScrollTrigger.kill(); // This ensures ScrollTrigger is cleared when the component unmounts
-    };
   }, []);
-
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
@@ -87,4 +72,3 @@ const Work = () => {
 };
 
 export default Work;
-//
